@@ -201,9 +201,9 @@ if __name__ == '__main__':
     root_dir = DataDir.DataRoot
     num_classes = DataDir.nclasses
     
-    weights_path_url = 'http://www.cs.toronto.edu/~guerzhoy/tf_alexnet/bvlc_alexnet.npy'
-    weights_path = root_dir+weights_path_url.split('/')[-1]
-    load_emodb.maybe_download(weights_path,weights_path_url)
+    #weights_path_url = 'http://www.cs.toronto.edu/~guerzhoy/tf_alexnet/bvlc_alexnet.npy'
+    #weights_path = root_dir+weights_path_url.split('/')[-1]
+    #load_emodb.maybe_download(weights_path,weights_path_url)
     
     # Learning params
     learning_rate = 0.001
