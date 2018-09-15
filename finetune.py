@@ -126,8 +126,8 @@ def train_session(train_file,val_file,alexnet_file):
                                                           filewriter_path))
     
         # Loop over number of epochs
-        for epoch in range(num_epochs):
-    
+        #for epoch in range(num_epochs):
+        for epoch in range(2):
     #        print("{} Epoch number: {}".format(datetime.now(), epoch+1))
     
             # Initialize iterator with the training dataset
@@ -135,8 +135,8 @@ def train_session(train_file,val_file,alexnet_file):
             train_acc = 0.
             train_count = 0
             train_loss = 0
-            for step in range(train_batches_per_epoch):
-    
+            #for step in range(train_batches_per_epoch):
+            for step in range(2):
                 # get next batch of data
                 img_batch, label_batch = sess.run(next_batch)
     
@@ -157,18 +157,18 @@ def train_session(train_file,val_file,alexnet_file):
                 train_count += 1
             train_acc /= train_count
             train_loss /= train_count 
-    #        print("{} Training Loss = {:.4f}".format(datetime.now(),train_loss))
-    #        print("{} Saving checkpoint of model...".format(datetime.now()))
+            print("{} Training Loss = {:.4f}".format(datetime.now(),train_loss))
+            print("{} Saving checkpoint of model...".format(datetime.now()))
     
     
             # Validate the model on the entire validation set
-    #        print("{} Start validation".format(datetime.now()))
+            print("{} Start validation".format(datetime.now()))
             sess.run(validation_init_op)
             test_acc = 0.
             test_count = 0
             test_loss = 0
-            for _ in range(val_batches_per_epoch):
-    
+            #for _ in range(val_batches_per_epoch):
+            for _ in range(2):
                 img_batch, label_batch = sess.run(next_batch)
                 acc,loss_value = sess.run((accuracy,loss), feed_dict={x: img_batch,
                                                     y: label_batch,
@@ -201,9 +201,9 @@ if __name__ == '__main__':
     root_dir = DataDir.DataRoot
     num_classes = DataDir.nclasses
     
-    #weights_path_url = 'http://www.cs.toronto.edu/~guerzhoy/tf_alexnet/bvlc_alexnet.npy'
-    #weights_path = root_dir+weights_path_url.split('/')[-1]
-    #load_emodb.maybe_download(weights_path,weights_path_url)
+    weights_path_url = 'http://www.cs.toronto.edu/~guerzhoy/tf_alexnet/bvlc_alexnet.npy'
+    weights_path = root_dir+weights_path_url.split('/')[-1]
+    load_emodb.maybe_download(weights_path,weights_path_url)
     
     # Learning params
     learning_rate = 0.001
@@ -217,8 +217,8 @@ if __name__ == '__main__':
     display_step = 20
     
     # Path for tf.summary.FileWriter and to store model checkpoints
-    filewriter_path = "/tmp/finetune_alexnet/tensorboard"
-    checkpoint_path = "/tmp/finetune_alexnet/checkpoints"
+    filewriter_path = "EMODB/tmp/finetune_alexnet/tensorboard"
+    checkpoint_path = "EMODB/tmp/finetune_alexnet/checkpoints"
     
     x = tf.placeholder(tf.float32, [None, 227, 227, 3],name='input')
     y = tf.placeholder(tf.float32, [None, num_classes])
